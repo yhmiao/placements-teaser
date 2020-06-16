@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_113747) do
+ActiveRecord::Schema.define(version: 2020_06_16_121621) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 2020_06_15_113747) do
     t.decimal "actual_amount", precision: 10, scale: 15, default: "0.0", null: false
     t.decimal "adjustments", precision: 10, scale: 15, default: "0.0", null: false
     t.index ["campaign_id"], name: "index_line_items_on_campaign_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
