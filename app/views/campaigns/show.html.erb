@@ -1,0 +1,41 @@
+<h4 class="center">Campaign</h4>
+
+<div class="card blue-grey darken-">
+  <div class="card-content white-text">
+    <span class="card-title">Name</span>
+    <p><%= @campaign.name %></p>
+  </div>
+  <div class="card-content white-text">
+    <span class="card-title">Grand Total</span>
+    <p><%= @campaign.grand_total %></p>
+  </div>
+  <div class="card-content white-text">
+    <span class="card-title">Line Items Count</span>
+    <p><%= @campaign.line_items_count %></p>
+  </div>
+  <div class="card-content grey lighten-4">
+    <h5>Line Items</h5>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Booked</th>
+        <th>Actual</th>
+        <th>Adjustments</th>
+        <th>Sub-total</th>
+      </tr>
+      <% @line_items.each do |line_item| %>
+        <tr>
+          <td><%= line_item.name %></td>
+          <td><%= line_item.booked_amount %></td>
+          <td><%= line_item.actual_amount %></td>
+          <td><%= line_item.adjustments %></td>
+          <td><%= line_item.sub_total %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <div class="center">
+      <%= paginate(@line_items) %>
+    </div>
+  </div>
+</div>
