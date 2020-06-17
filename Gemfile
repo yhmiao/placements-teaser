@@ -22,6 +22,7 @@ gem 'turbolinks'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
+gem 'materialize-sass', '~> 1.0.0'
 
 group :development, :test do
   gem 'pry-byebug'

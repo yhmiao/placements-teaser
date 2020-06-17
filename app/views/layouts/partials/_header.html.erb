@@ -1,0 +1,21 @@
+<nav>
+  <div class="container">
+    <div class="nav-wrapper">
+      <%= link_to line_items_path, class: "left brand-logo mt-5" do %>
+        <%= image_tag('Placements_logo.png') %>
+      <% end %>
+      <ul class="right">
+        <% if current_user %>
+          <li>
+            Salutations, <%= current_user.email %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <i class="material-icons">exit_to_app</i>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
