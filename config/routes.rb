@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
+  resources :campaigns, only: :index
   resources :line_items, only: :index
 end

@@ -1,9 +1,12 @@
 <nav>
   <div class="container">
     <div class="nav-wrapper">
-      <%= link_to line_items_path, class: "left brand-logo mt-5" do %>
+      <%= link_to line_items_path, class: "center brand-logo mt-5" do %>
         <%= image_tag('Placements_logo.png') %>
       <% end %>
+      <ul class="left hide-on-med-and-down">
+        <li><%= link_to "Campaigns", campaigns_path %></li>
+      </ul>
       <ul class="right">
         <% if current_user %>
           <li>
