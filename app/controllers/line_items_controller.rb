@@ -1,10 +1,12 @@
 class LineItemsController < ApplicationController
   before_action :set_line_items
-  before_action :set_line_item, only: %i[edit update]
+  before_action :set_line_item, only: %i[show edit update]
 
   def index
     @line_items = @line_items.page(params[:page]).per(params[:per])
   end
+
+  def show; end
 
   def edit; end
 
@@ -12,6 +14,10 @@ class LineItemsController < ApplicationController
     @line_item.update!(line_item_params)
 
     render :show
+  rescue ActiveRecord::StaleObjectError
+    @alert = 'Oops, someone has just updated the adjustments.'
+
+    render 'layouts/alert'
   end
 
   private
