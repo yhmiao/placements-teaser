@@ -1,7 +1,3 @@
-<table>
-  <% @line_items.each do |line_item| %>
-    <tr>
-      <td><%= line_item.id %></td>
-    </tr>
-  <% end %>
-</table>
+<h4 class="center">Line Items</h4>
+
+<%= render(partial: 'line_items/partials/list', locals: {line_items: @line_items, show_campaign: true}) %>

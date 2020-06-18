@@ -1,0 +1,15 @@
+
+var adjustments = $("#line_item_<%= @line_item.id %>_adjustments");
+var subTotal    = $("#line_item_<%= @line_item.id %>_sub_total");
+var grandTotal  = $("#campaign_<%= @line_item.campaign.id %>_grand_total");
+
+adjustments.empty();
+adjustments.append("<%= escape_javascript(render partial: 'line_items/partials/adjustments', locals: {line_item: @line_item}).html_safe %>");
+
+subTotal.empty();
+subTotal.append(<%= @line_item.sub_total %>);
+
+if(grandTotal.length) {
+  grandTotal.empty();
+  grandTotal.append(<%= @line_item.campaign.grand_total %>);
+}

@@ -1,0 +1,5 @@
+
+var adjustments = $("#line_item_<%= @line_item.id %>_adjustments");
+
+adjustments.empty();
+adjustments.append("<%= escape_javascript(render partial: 'line_items/partials/form', locals: {line_item: @line_item}).html_safe %>")

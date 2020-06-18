@@ -1,0 +1,34 @@
+
+<table>
+  <tr>
+    <% if show_campaign.present? %>
+      <th>Campaign</th>
+    <% end %>
+    <th>Name</th>
+    <th>Booked</th>
+    <th>Actual</th>
+    <th>Adjustments</th>
+    <th>Sub-total</th>
+  </tr>
+
+  <% line_items.each do |line_item| %>
+    <tr>
+      <% if show_campaign.present? %>
+        <td><%= link_to line_item.campaign.name, campaign_path(line_item.campaign.id) %></td>
+      <% end %>
+      <td><%= line_item.name %></td>
+      <td><%= line_item.booked_amount %></td>
+      <td><%= line_item.actual_amount %></td>
+      <td id="line_item_<%= line_item.id %>_adjustments">
+        <%= render(partial: 'line_items/partials/adjustments', locals: {line_item: line_item}) %>
+      </td>
+      <td id="line_item_<%= line_item.id %>_sub_total">
+        <%= line_item.sub_total %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="center">
+  <%= paginate(line_items) %>
+</div>

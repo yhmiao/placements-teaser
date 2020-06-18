@@ -1,0 +1,16 @@
+
+<%= form_for(line_item, url: line_item_path, remote: true, method: :put) do |f| %>
+  <%= f.hidden_field :lock_version %>
+
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.number_field :adjustments, step: :any %>
+    </div>
+
+    <div class="input-field col s2">
+      <%= button_tag type: "submit", class: "check light-green-text text-accent-4" do %>
+        <i class="material-icons">check</i>
+      <% end %>
+    </div>
+  </div>
+<% end %>

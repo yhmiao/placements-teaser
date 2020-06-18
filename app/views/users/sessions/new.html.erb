@@ -1,6 +1,8 @@
 <h4 class="center">Log in</h4>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "col s12") do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
   <div class="row">
     <div class="input-field col s12">
       <%= f.label :email %><br />
