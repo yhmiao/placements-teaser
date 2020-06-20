@@ -3,7 +3,18 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: %i[show edit update]
 
   def index
-    @line_items = @line_items.page(params[:page]).per(params[:per])
+    if params[:search].present?
+      if search_params[:search_text].present?
+        sql_query   = "#{query_str(LineItem::SEARCHABLE)} OR #{query_str(Campaign::SEARCHABLE)}" 
+        @line_items = @line_items.left_joins(:campaign).where(sql_query)
+      end
+
+      @line_items = @line_items.page(params[:page]).per(search_params[:per])
+
+      set_search
+    else
+      @line_items = @line_items.page
+    end
   end
 
   def show; end

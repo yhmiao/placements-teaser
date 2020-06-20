@@ -19,7 +19,10 @@
       <td><%= line_item.booked_amount %></td>
       <td><%= line_item.actual_amount %></td>
       <td id="line_item_<%= line_item.id %>_adjustments">
-        <%= render(partial: 'line_items/partials/adjustments', locals: {line_item: line_item}) %>
+        <%= line_item.adjustments %>&nbsp;&nbsp;
+        <%= link_to edit_line_item_path(line_item.id), remote: true do %>
+          <i class="material-icons">edit</i>
+        <% end %>
       </td>
       <td id="line_item_<%= line_item.id %>_sub_total">
         <%= line_item.sub_total %>
