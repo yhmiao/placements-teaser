@@ -4,7 +4,7 @@ class Campaign < ApplicationRecord
   SEARCHABLE = 'campaigns.name'.freeze
 
   def line_items_count
-    line_items.count
+    line_items.length
   end
 
   def grand_total

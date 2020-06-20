@@ -1,22 +1,4 @@
 <h4 class="center">Campaigns</h4>
 
 <%= render(partial: 'layouts/partials/search', locals: {search_path: campaigns_path}) %>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Items Count</th>
-    <th>Grand Total</th>
-  </tr>
-  <% @campaigns.each do |campaign| %>
-    <tr>
-      <td><%= link_to campaign.name, campaign_path(campaign.id) %></td>
-      <td><%= campaign.line_items_count %></td>
-      <td><%= campaign.grand_total %></td>
-    </tr>
-  <% end %>
-</table>
-
-<div class="center">
-  <%= paginate(@campaigns) %>
-</div>
+<%= render(partial: 'campaigns/partials/list', locals: {campaigns: @campaigns}) %>

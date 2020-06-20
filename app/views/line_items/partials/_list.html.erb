@@ -1,12 +1,12 @@
 <table>
   <tr>
     <% if show_campaign.present? %>
-      <th>Campaign</th>
+      <th><%= sort_link_to("Campaign", request.parameters, "campaigns.name") %></th>
     <% end %>
-    <th>Name</th>
-    <th>Booked</th>
-    <th>Actual</th>
-    <th>Adjustments</th>
+    <th><%= sort_link_to("Name", request.parameters, "line_items.name") %></th>
+    <th><%= sort_link_to("Booked", request.parameters, "booked_amount") %></th>
+    <th><%= sort_link_to("Actual", request.parameters, "actual_amount") %></th>
+    <th><%= sort_link_to("Adjustments", request.parameters, "adjustments") %></th>
     <th>Sub-total</th>
   </tr>
 
