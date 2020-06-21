@@ -8,13 +8,13 @@
     </div>
 
     <div class="input-field col s2">
-      <%= button_tag type: "submit", class: "transparent_icon light-green-text text-accent-4" do %>
+      <%= button_tag type: "submit", class: "transparent_icon pointer light-green-text text-accent-4" do %>
         <i class="material-icons">check</i>
       <% end %>
     </div>
 
     <div class="input-field col s2">
-      <%= link_to line_item_path(line_item.id), class: "transparent_icon red-text text-accent-4", remote: true do %>
+      <%= link_to line_item_path(line_item.id), class: "transparent_icon pointer red-text text-accent-4", remote: true do %>
         <i class="material-icons">close</i>
       <% end %>
     </div>

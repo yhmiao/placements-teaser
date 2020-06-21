@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_005217) do
+ActiveRecord::Schema.define(version: 2020_06_20_234943) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_06_18_005217) do
     t.decimal "actual_amount", precision: 10, scale: 15, default: "0.0", null: false
     t.decimal "adjustments", precision: 10, scale: 15, default: "0.0", null: false
     t.integer "lock_version", default: 0, null: false
+    t.string "status", default: "unreviewed"
     t.index ["campaign_id"], name: "index_line_items_on_campaign_id"
   end
 

@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   before_action :set_line_items
-  before_action :set_line_item, only: %i[show edit update]
+  before_action :set_line_item, only: %i[show edit update change_status]
 
   def index
     if params[:search_text].present?
@@ -24,7 +24,17 @@ class LineItemsController < ApplicationController
 
     render :show
   rescue ActiveRecord::StaleObjectError
-    @alert = 'Oops, someone has just updated the adjustments.'
+    @alert = 'Oops, someone has just updated the adjustments. Please refresh this page.'
+
+    render 'layouts/alert'
+  end
+
+  def change_status
+    @line_item.send("#{params[:event]}!")
+
+    render :change_status
+  rescue AASM::InvalidTransition
+    @alert = 'Oops, change status has failed. Please refresh this page.'
 
     render 'layouts/alert'
   end

@@ -24,6 +24,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'materialize-sass', '~> 1.0.0'
 gem 'kaminari'
+gem 'aasm'
 
 group :development, :test do
   gem 'pry-byebug'

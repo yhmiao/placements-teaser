@@ -9,5 +9,9 @@ Rails.application.routes.draw do
 
   resources :campaigns, only: %i[index show]
   resources :line_items, only: :index
-  resources :line_items, only: %i[show edit update], format: :js
+  resources :line_items, only: %i[show edit update], format: :js do
+    member do
+      put :change_status
+    end
+  end
 end

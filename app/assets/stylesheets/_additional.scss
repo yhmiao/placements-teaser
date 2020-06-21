@@ -9,7 +9,9 @@
 .transparent_icon {
   border: 0;
   background: none;
+}
 
+.pointer {
   &:hover {
     cursor: pointer;
   }
