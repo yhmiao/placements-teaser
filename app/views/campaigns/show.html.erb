@@ -1,6 +1,11 @@
 <h4 class="center blue-text text-lighten-3">Campaign</h4>
 
-<%= link_to 'Back', :back %>
+<div class="clearfix">
+  <%= link_to 'Back', :back, class: "left" %>
+  <%= link_to 'Download Invoice', campaign_path(@campaign, format: :csv), class: "right" %>
+</div>
+
+<div class="clear"></div>
 
 <div class="card">
   <div class="card-content">

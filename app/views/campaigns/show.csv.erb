@@ -1,0 +1,10 @@
+<%= CSV.generate_line ["Name: #{@campaign.name}"] -%>
+<%= CSV.generate_line ["Date: #{Date.current.strftime('%F')}"] -%>
+<%= CSV.generate_line ["Line Item Count: #{@campaign.line_items_count}"] -%>
+<%= CSV.generate_line ["Status: #{@campaign.status}"] -%>
+<%= CSV.generate_line ["Grand Total: #{@campaign.grand_total}"] %>
+<%= CSV.generate_line ['Line Item Name', 'Status', 'Booked', 'Actual', 'Adjustment', 'Sub Total'] -%>
+<%- @campaign.line_items.each do |line_item| -%>
+  <%= CSV.generate_line([line_item.name, line_item.status, line_item.booked_amount, line_item.actual_amount, line_item.adjustments, line_item.sub_total]) -%>
+  <%- end -%>
+<%= CSV.generate_line [nil, nil, nil, nil, 'Grand Total', @campaign.grand_total] %>

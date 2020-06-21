@@ -1,3 +1,5 @@
+require 'csv'
+
 class CampaignsController < ApplicationController
   before_action :set_campaigns
   before_action :set_campaign, only: %i[show change_status]
@@ -9,6 +11,14 @@ class CampaignsController < ApplicationController
 
   def show
     @line_items = @campaign.line_items.page(params[:page]).per(params[:per])
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"invoice-#{DateTime.current.strftime('%Q')}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def change_status
