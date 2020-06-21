@@ -1,0 +1,28 @@
+<table>
+  <tr>
+    <th><%= sort_link_to("Item Type", request.parameters, "item_type") %></th>
+    <th><%= sort_link_to("Item ID", request.parameters, "item_id") %></th>
+    <th><%= sort_link_to("Event", request.parameters, "event") %></th>
+    <th><%= sort_link_to("Email", request.parameters, "users.email") %></th>
+    <th><%= sort_link_to("Created At", request.parameters, "versions.created_at") %></th>
+    <th></th>
+  </tr>
+  <% versions.each do |version| %>
+    <tr>
+      <th><%= version.item_type %></th>
+      <th><%= version.item_id %></th>
+      <th><%= version.event %></th>
+      <td><%= version.user.try(:email) %></td>
+      <td><%= version.created_at %></td>
+      <td>
+        <%= link_to version_path(version.id) do %>
+          <i class="material-icons">remove_red_eye</i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="center">
+  <%= paginate(versions) if versions.present? %>
+</div>

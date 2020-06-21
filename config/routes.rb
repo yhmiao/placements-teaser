@@ -9,14 +9,16 @@ Rails.application.routes.draw do
 
   resources :campaigns, only: %i[index show] do
     member do
-      put :change_status, format: :js
+      put :change_status
     end
   end
 
   resources :line_items, only: :index
-  resources :line_items, only: %i[show edit update], format: :js do
+  resources :line_items, only: %i[show edit update] do
     member do
       put :change_status
     end
   end
+
+  resources :versions, only: %i[index show]
 end

@@ -1,0 +1,28 @@
+<h4 class="center">Version</h4>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">Item Type</span>
+    <p><%= @version.item_type %></p>
+  </div>
+
+  <div class="card-content">
+    <span class="card-title">Item Link</span>
+    <p><%= link_to @item.name, url_for(@item) %></p>
+  </div>
+
+  <div class="card-content">
+    <span class="card-title">Event</span>
+    <p><%= @version.event %></p>
+  </div>
+
+  <div class="card-content">
+    <span class="card-title">User</span>
+    <p><%= @version.user.try(:email) %></p>
+  </div>
+
+  <div class="card-content grey lighten-4">
+    <span class="card-title">Object</span>
+    <p><%= render partial: 'layouts/partials/object', locals: {object: @version.object} %></p>
+  </div>
+</div>

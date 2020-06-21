@@ -5,7 +5,7 @@ class LineItemsController < ApplicationController
   def index
     if params[:search_text].present?
       sql_query   = "#{query_str(LineItem::SEARCHABLE)} OR #{query_str(Campaign::SEARCHABLE)}"
-      @line_items = @line_items.left_joins(:campaign).where(sql_query)
+      @line_items = @line_items.where(sql_query)
     end
 
     if params[:sort_by].present?
@@ -42,7 +42,7 @@ class LineItemsController < ApplicationController
   private
 
   def set_line_items
-    @line_items = LineItem.includes(:campaign)
+    @line_items = LineItem.includes(:campaign).left_joins(:campaign)
   end
 
   def set_line_item

@@ -6,6 +6,8 @@ class LineItem < ApplicationRecord
 
   belongs_to :campaign
 
+  has_paper_trail
+
   aasm :status do
     state(STATUS[0], initial: true)
     state(STATUS[1])

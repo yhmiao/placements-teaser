@@ -1,0 +1,23 @@
+{<br />
+  <div class="ml-20">
+  <% object.each do |key, val| %>
+    <div class="ml-20">
+      <%= key %>:
+      <% if val.is_a?(Hash) %>
+        <%= render partial: 'layouts/partials/object', locals: {object: val} %>
+      <% elsif val.is_a?(Array) %>
+        [<br />
+        <div class="ml-20">
+          <% val.each do |i| %>
+            <%= i %>,<br />
+          <% end %>
+        </div>
+        ]
+      <% else %>
+        <%= val.is_a?(String) ? "\"#{val}\"" : val %>
+      <% end %>
+      ,<br />
+    </div>
+  <% end %>
+  </div>
+}

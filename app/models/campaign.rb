@@ -6,6 +6,8 @@ class Campaign < ApplicationRecord
 
   has_many :line_items
 
+  has_paper_trail
+
   aasm :status do
     state(STATUS[0], initial: true)
     state(STATUS[1])

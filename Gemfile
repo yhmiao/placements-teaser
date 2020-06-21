@@ -25,6 +25,7 @@ gem 'devise'
 gem 'materialize-sass', '~> 1.0.0'
 gem 'kaminari'
 gem 'aasm'
+gem 'paper_trail'
 
 group :development, :test do
   gem 'pry-byebug'
