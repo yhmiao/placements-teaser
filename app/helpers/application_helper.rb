@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def is_active(controller)
+    'active' if params[:controller] == controller
+  end
+
   def sort_link_to(name, params, column)
     if params['sort_by'] == column
       order_by = params['order_by'] == 'ASC' ? 'DESC' : 'ASC'

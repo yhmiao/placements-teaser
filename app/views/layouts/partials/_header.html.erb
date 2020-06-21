@@ -5,13 +5,13 @@
         <%= image_tag('Placements_logo.png') %>
       <% end %>
       <ul class="left hide-on-med-and-down">
-        <li><%= link_to "Campaigns", campaigns_path %></li>
+        <li class="<%= is_active('campaigns') %>"><%= link_to "Campaigns", campaigns_path %></li>
       </ul>
       <ul class="left hide-on-med-and-down">
-        <li><%= link_to "Line Items", line_items_path %></li>
+        <li class="<%= is_active('line_items') %>"><%= link_to "Line Items", line_items_path %></li>
       </ul>
       <ul class="left hide-on-med-and-down">
-        <li><%= link_to "Versions", versions_path %></li>
+        <li class="<%= is_active('versions') %>"><%= link_to "Versions", versions_path %></li>
       </ul>
       <ul class="right">
         <% if current_user %>
