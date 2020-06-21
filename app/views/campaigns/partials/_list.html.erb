@@ -8,13 +8,19 @@
     <th>Items Count</th>
     <th>Grand Total</th>
     <th><%= sort_link_to("Status", request.parameters, "campaigns.status") %></th>
+    <th></th>
   </tr>
   <% campaigns.each do |campaign| %>
     <tr>
-      <td><%= link_to campaign.name, campaign_path(campaign.id) %></td>
+      <td><%= campaign.name %></td>
       <td><%= campaign.line_items_count %></td>
       <td><%= campaign.grand_total %></td>
       <td><%= campaign.status %></td>
+      <td>
+        <%= link_to campaign_path(campaign.id) do %>
+          <i class="material-icons">remove_red_eye</i>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>

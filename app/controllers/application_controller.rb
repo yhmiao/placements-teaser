@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
 
   def update_alert(column)
     @alert = "Oops, #{column} has failed."
-    @alert += " Refresh page to see if #{column} has already been updated."
+    @alert += "\nRefresh page to see if #{column} has already been updated."
   end
 end

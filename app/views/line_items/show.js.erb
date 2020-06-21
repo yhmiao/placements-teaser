@@ -12,3 +12,11 @@ if(grandTotal.length) {
   grandTotal.empty();
   grandTotal.append(<%= @line_item.campaign.grand_total %>);
 }
+
+<% if params[:action] == 'update' %>
+  var message = "Adjustments has been updated to <%= @line_item.adjustments %>.";
+      message += "\nSub-total has been updated to <%= @line_item.sub_total %>.";
+      message += "\nGrand-total has been updated to <%= @line_item.campaign.grand_total %>.";
+
+  alert(message);
+<% end %>

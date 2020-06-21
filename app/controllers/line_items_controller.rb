@@ -13,21 +13,17 @@ class LineItemsController < ApplicationController
 
   def update
     @line_item.update!(line_item_params)
-
     render :show
   rescue ActiveRecord::StaleObjectError => e
     update_alert('adjustments')
-
     render 'layouts/alert'
   end
 
   def change_status
     @line_item.send("#{params[:event]}!")
-
     render :change_status
   rescue AASM::InvalidTransition
     update_alert('status')
-
     render 'layouts/alert'
   end
 

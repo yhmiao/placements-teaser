@@ -13,13 +13,10 @@ class CampaignsController < ApplicationController
 
   def change_status
     @campaign.send("#{params[:event]}!")
-
     render :change_status
   rescue AASM::InvalidTransition
     update_alert('status')
-
-    @alert += " Please make sure all line_items have been reviewed first."
-
+    @alert += "\nPlease make sure all line_items have been reviewed first."
     render 'layouts/alert'
   end
 
