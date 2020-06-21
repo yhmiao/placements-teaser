@@ -7,7 +7,12 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
-  resources :campaigns, only: %i[index show]
+  resources :campaigns, only: %i[index show] do
+    member do
+      put :change_status, format: :js
+    end
+  end
+
   resources :line_items, only: :index
   resources :line_items, only: %i[show edit update], format: :js do
     member do

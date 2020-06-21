@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
       "#{col} LIKE LOWER(#{ActiveRecord::Base.connection.quote("%" + params[:search_text] + "%")})"
     end.join(" OR ")
   end
+
+  def update_alert(column)
+    @alert = "Oops, #{column} has failed."
+    @alert += " Refresh page to see if #{column} has already been updated."
+  end
 end

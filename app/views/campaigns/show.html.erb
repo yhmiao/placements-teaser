@@ -16,6 +16,17 @@
     <p><%= @campaign.line_items_count %></p>
   </div>
 
+  <div class="card-content white-text">
+    <span class="card-title">Status</span>
+    <p id="campaign_<%= @campaign.id %>_status">
+      <% if @campaign.unreviewed? %>
+        <%= link_to "review", change_status_campaign_path(@campaign.id, event: 'review'), method: :put, remote: true %>
+      <% else %>
+        <%= @campaign.status %>
+      <% end %>
+    </p>
+  </div>
+
   <div class="card-content grey lighten-4">
     <h5>Line Items</h5>
     <%= render(partial: 'line_items/partials/list', locals: {line_items: @line_items, show_campaign: false}) %>

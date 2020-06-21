@@ -1,0 +1,4 @@
+var aasm_status = $("#campaign_<%= @campaign.id %>_status");
+
+aasm_status.empty();
+aasm_status.append("<%= @campaign.status %>");

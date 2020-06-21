@@ -23,8 +23,8 @@ class LineItemsController < ApplicationController
     @line_item.update!(line_item_params)
 
     render :show
-  rescue ActiveRecord::StaleObjectError
-    @alert = 'Oops, someone has just updated the adjustments. Please refresh this page.'
+  rescue ActiveRecord::StaleObjectError => e
+    update_alert('adjustments')
 
     render 'layouts/alert'
   end
@@ -34,7 +34,7 @@ class LineItemsController < ApplicationController
 
     render :change_status
   rescue AASM::InvalidTransition
-    @alert = 'Oops, change status has failed. Please refresh this page.'
+    update_alert('status')
 
     render 'layouts/alert'
   end

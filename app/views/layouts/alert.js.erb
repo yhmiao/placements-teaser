@@ -1,1 +1,1 @@
-alert("<%= @alert %>");
+alert("<%= escape_javascript(@alert).html_safe %>");

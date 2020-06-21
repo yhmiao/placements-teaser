@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_234943) do
+ActiveRecord::Schema.define(version: 2020_06_21_010452) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "unreviewed"
   end
 
   create_table "line_items", force: :cascade do |t|
