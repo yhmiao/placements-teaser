@@ -1,3 +1,7 @@
+<div class="center">
+  <%= paginate(versions) if versions.present? %>
+</div>
+
 <table>
   <tr>
     <th><%= sort_link_to("Item Type", request.parameters, "item_type") %></th>

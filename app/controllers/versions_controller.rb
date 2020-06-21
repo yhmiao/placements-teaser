@@ -3,16 +3,8 @@ class VersionsController < ApplicationController
   before_action :set_version, only: :show
 
   def index
-    if params[:search_text].present?
-      sql_query = "#{query_str(Version::SEARCHABLE)} OR #{query_str(User::SEARCHABLE)}"
-      @versions = @versions.where(sql_query)
-    end
-
-    if params[:sort_by].present?
-      @versions = @versions.order("#{params[:sort_by]} #{params[:order_by] || 'asc'}")
-    end
-
-    @versions = @versions.page(params[:page]).per(params[:per])
+    col_search = Version::SEARCHABLE + User::SEARCHABLE
+    @versions  = filter_search(@versions, col_search)
   end
 
   def show

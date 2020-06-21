@@ -1,18 +1,24 @@
+<div class="center">
+  <%= paginate(campaigns) if campaigns.present? %>
+</div>
+
 <table>
   <tr>
     <th><%= sort_link_to("Name", request.parameters, "name") %></th>
     <th>Items Count</th>
     <th>Grand Total</th>
+    <th><%= sort_link_to("Status", request.parameters, "campaigns.status") %></th>
   </tr>
   <% campaigns.each do |campaign| %>
     <tr>
       <td><%= link_to campaign.name, campaign_path(campaign.id) %></td>
       <td><%= campaign.line_items_count %></td>
       <td><%= campaign.grand_total %></td>
+      <td><%= campaign.status %></td>
     </tr>
   <% end %>
 </table>
 
 <div class="center">
-  <%= paginate(campaigns) %>
+  <%= paginate(campaigns) if campaigns.present? %>
 </div>

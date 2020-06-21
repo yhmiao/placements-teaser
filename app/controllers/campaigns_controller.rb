@@ -3,16 +3,8 @@ class CampaignsController < ApplicationController
   before_action :set_campaign, only: %i[show change_status]
 
   def index
-    if params[:search_text].present?
-      sql_query  = query_str(Campaign::SEARCHABLE)
-      @campaigns = @campaigns.where(sql_query)
-    end
-
-    if params[:sort_by].present?
-      @campaigns = @campaigns.order("#{params[:sort_by]} #{params[:order_by] || 'asc'}")
-    end
-
-    @campaigns = @campaigns.page(params[:page]).per(params[:per])
+    col_search = Campaign::SEARCHABLE
+    @campaigns = filter_search(@campaigns, col_search)
   end
 
   def show

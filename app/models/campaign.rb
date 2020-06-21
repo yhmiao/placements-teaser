@@ -1,7 +1,7 @@
 class Campaign < ApplicationRecord
   include AASM
 
-  SEARCHABLE = 'campaigns.name'.freeze
+  SEARCHABLE = %w[campaigns.name campaigns.status].freeze
   STATUS     = %i[unreviewed reviewed].freeze
 
   has_many :line_items

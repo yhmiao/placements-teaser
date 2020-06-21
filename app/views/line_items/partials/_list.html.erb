@@ -1,3 +1,7 @@
+<div class="center">
+  <%= paginate(line_items) if line_items.present? %>
+</div>
+
 <table>
   <tr>
     <% if show_campaign.present? %>
@@ -40,5 +44,5 @@
 </table>
 
 <div class="center">
-  <%= paginate(line_items) %>
+  <%= paginate(line_items) if line_items.present? %>
 </div>

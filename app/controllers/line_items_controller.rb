@@ -3,16 +3,8 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: %i[show edit update change_status]
 
   def index
-    if params[:search_text].present?
-      sql_query   = "#{query_str(LineItem::SEARCHABLE)} OR #{query_str(Campaign::SEARCHABLE)}"
-      @line_items = @line_items.where(sql_query)
-    end
-
-    if params[:sort_by].present?
-      @line_items = @line_items.order("#{params[:sort_by]} #{params[:order_by] || 'asc'}")
-    end
-
-    @line_items = @line_items.page(params[:page]).per(params[:per])
+    col_search  = LineItem::SEARCHABLE + LineItem::SEARCHABLE
+    @line_items = filter_search(@line_items, col_search)
   end
 
   def show; end

@@ -1,7 +1,7 @@
 class LineItem < ApplicationRecord
   include AASM
 
-  SEARCHABLE = %w[line_items.name booked_amount actual_amount adjustments status].freeze
+  SEARCHABLE = %w[line_items.name booked_amount actual_amount adjustments line_items.status].freeze
   STATUS     = %i[unreviewed reviewed].freeze
 
   belongs_to :campaign
