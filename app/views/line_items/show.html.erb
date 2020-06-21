@@ -1,4 +1,4 @@
-<h4 class="center">Line Item</h4>
+<h4 class="center blue-text text-lighten-3">Line Item</h4>
 
 <div class="card">
   <div class="card-content">
@@ -40,7 +40,7 @@
     <span class="card-title">Status</span>
     <p id="line_item_<%= @line_item.id %>_status">
       <% if @line_item.unreviewed? %>
-        <%= link_to "review", change_status_line_item_path(@line_item.id, event: 'review'), method: :put, remote: true %>
+        <%= link_to "review", change_status_line_item_path(@line_item.id, event: 'review'), method: :put, remote: true, class: "waves-effect waves-light btn" %>
       <% else %>
         <%= @line_item.status %>
       <% end %>
