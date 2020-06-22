@@ -1,8 +1,13 @@
 <h4 class="center blue-text text-lighten-3">Invoice</h4>
 
 <div class="clearfix">
-  <%= link_to 'Back', :back, class: "left" %>
-  <%#= link_to 'Download Invoice', campaign_path(@campaign, format: :csv), class: "right" %>
+  <%= link_to :back, class: "left" do %>
+    <i class="material-icons">navigate_before</i>
+  <% end %>
+
+  <%= link_to invoice_path(@invoice, format: :xlsx), class: "right" do %>
+    <i class="material-icons">file_download</i>
+  <% end %>
 </div>
 
 <div class="clear"></div>
@@ -34,7 +39,7 @@
     <h5>Campaigns</h5>
 
     <div class="clearfix">
-      <a class="right" href="#select_campaigns"><i class="material-icons">add</i></a>
+      <a class="modal-trigger right" href="#select_campaigns"><i class="material-icons">add</i></a>
     </div>
 
     <%= render(partial: 'invoices/partials/select_campaigns', locals: {campaigns: @select_campaigns, url: invoice_path, method: :put}) %>

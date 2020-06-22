@@ -1,0 +1,37 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header_cell = style.add_style(b: true)
+
+  @invoice.campaigns.each_with_index do |campaign, index|
+    wb.add_worksheet(name: "campaign_#{index+1}") do |sheet|
+      sheet.add_row ["Name: #{campaign.name}"], style: [header_cell]
+      sheet.add_row ["Line Item Count: #{campaign.line_items_count}"], style: [header_cell]
+      sheet.add_row ["Status: #{campaign.status}"], style: [header_cell]
+      sheet.add_row ["Campaign Grand Total: #{campaign.grand_total}"], style: [header_cell]
+      sheet.add_row
+      sheet.add_row ['Line Item Name', 'Status', 'Booked', 'Actual', 'Adjustments', 'Sub Total'], style: [header_cell, header_cell, header_cell, header_cell, header_cell, header_cell]
+
+      campaign.line_items.each do |line_item|
+        sheet.add_row [line_item.name, line_item.status, line_item.booked_amount, line_item.actual_amount, line_item.adjustments, line_item.sub_total]
+      end
+
+      sheet.add_row [nil, nil, nil, nil, 'Grand Total:', campaign.grand_total], style: [nil, nil, nil, nil, header_cell, header_cell]
+    end
+  end
+
+  wb.add_worksheet(name: "Invoice Summary") do |sheet|
+    sheet.add_row ["Date: #{Date.current.strftime('%F')}"], style: [header_cell]
+    sheet.add_row ["Token: #{@invoice.token}"], style: [header_cell]
+    sheet.add_row ["Campaigns Count: #{@invoice.campaigns_count}"], style: [header_cell]
+    sheet.add_row ["Status: #{@invoice.status}"], style: [header_cell]
+    sheet.add_row ["Invoice Grand Total: #{@invoice.grand_total}"], style: [header_cell]
+    sheet.add_row
+    sheet.add_row ['Campaign Name', 'Status', 'Line Item Count', 'Campaign Grand Total'], style: [header_cell, header_cell, header_cell, header_cell]
+
+    @invoice.campaigns.each do |campaign|
+      sheet.add_row [campaign.name, campaign.status, campaign.line_items_count, campaign.grand_total]
+    end
+
+    sheet.add_row [nil, nil, 'Invoice Grand Total:', @invoice.grand_total], style: [nil, nil, header_cell, header_cell]
+  end
+end

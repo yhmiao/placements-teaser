@@ -19,8 +19,18 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @campaigns        = @invoice.campaigns.page(params[:page]).per(params[:per])
-    @select_campaigns = select_campaigns
+    @campaigns = @invoice.campaigns.page(params[:page]).per(params[:per])
+
+    respond_to do |format|
+      format.html do
+        @select_campaigns = select_campaigns
+      end
+
+      format.xlsx do
+        headers['Content-Disposition'] = "attachment; filename=\"invoice-#{DateTime.current.strftime('%Q')}.xlsx\""
+        headers['Content-Type'] ||= 'text/xlsx'
+      end
+    end
   end
 
   def update
