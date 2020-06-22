@@ -41,6 +41,6 @@
 
   <div class="card-content grey lighten-4">
     <h5>Line Items</h5>
-    <%= render(partial: 'line_items/partials/list', locals: {line_items: @line_items, in_campaign: true}) %>
+    <%= render(partial: 'line_items/partials/list', locals: {line_items: @line_items, campaign: @campaign}) %>
   </div>
 </div>

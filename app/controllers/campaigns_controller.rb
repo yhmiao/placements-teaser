@@ -26,7 +26,9 @@ class CampaignsController < ApplicationController
     render :change_status
   rescue AASM::InvalidTransition
     update_alert('status')
+
     @alert += "\nPlease make sure all line_items have been reviewed first."
+
     render 'layouts/alert'
   end
 

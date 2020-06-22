@@ -54,9 +54,11 @@ class InvoicesController < ApplicationController
     raise "Invoice must be in 'draft' status to be edited." unless @invoice.draft?
 
     @campaign = Campaign.find(params[:campaign_id])
+
     @invoice.campaigns.delete(@campaign)
   rescue => e
     @alert = e.message
+
     render 'layouts/alert'
   end
 
@@ -77,7 +79,10 @@ class InvoicesController < ApplicationController
   def select_campaigns
     col_search = Campaign::SEARCHABLE
     statuses   = Invoice::FAIL_STATUS.join("', '")
-    campaigns  = Campaign.includes(:line_items).left_joins(:invoices).where("invoices.id IS NULL OR invoices.status IN ('#{statuses}')")
+    campaigns  = Campaign.includes(:line_items)
+                         .left_joins(:invoices)
+                         .where("invoices.id IS NULL OR invoices.status IN ('#{statuses}')")
+
     filter_search(campaigns, col_search)
   end
 

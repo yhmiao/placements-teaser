@@ -1,13 +1,9 @@
-<div class="center">
-  <%= paginate(campaigns) if campaigns.present? %>
-</div>
-
 <table>
   <tr>
     <th>Select</th>
-    <th><%= sort_link_to("Name", request.parameters, "name") %></th>
+    <th>Name</th>
     <th>Grand Total</th>
-    <th><%= sort_link_to("Status", request.parameters, "campaigns.status") %></th>
+    <th>Status</th>
     <th></th>
   </tr>
 
@@ -19,9 +15,11 @@
           <span></span>
         </label>
       </td>
+
       <td><%= campaign.name %></td>
       <td><%= campaign.grand_total %></td>
       <td><%= campaign.status %></td>
+
       <td>
         <%= link_to campaign_path(campaign.id), target: :_blank do %>
           <i class="material-icons">remove_red_eye</i>
@@ -30,8 +28,3 @@
     </tr>
   <% end %>
 </table>
-<br />
-
-<div class="center">
-  <%= paginate(campaigns) if campaigns.present? %>
-</div>

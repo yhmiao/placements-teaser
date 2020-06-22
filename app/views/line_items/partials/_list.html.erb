@@ -1,12 +1,15 @@
+<% campaign ||= local_assigns[:invoice] %>
+
 <div class="center">
   <%= paginate(line_items) if line_items.present? %>
 </div>
 
 <table>
   <tr>
-    <% unless in_campaign %>
+    <% if campaign.blank? %>
       <th><%= sort_link_to("Campaign Name", request.parameters, "campaigns.name") %></th>
     <% end %>
+
     <th><%= sort_link_to("Line Item Name", request.parameters, "line_items.name") %></th>
     <th><%= sort_link_to("Booked", request.parameters, "booked_amount") %></th>
     <th><%= sort_link_to("Actual", request.parameters, "actual_amount") %></th>
@@ -18,30 +21,36 @@
 
   <% line_items.each do |line_item| %>
     <tr>
-      <% unless in_campaign %>
+      <% if campaign.blank? %>
         <td><%= link_to line_item.campaign.name, campaign_path(line_item.campaign.id) %></td>
       <% end %>
+
       <td><%= line_item.name %></td>
       <td><%= line_item.booked_amount %></td>
       <td><%= line_item.actual_amount %></td>
+
       <td id="line_item_<%= line_item.id %>_adjustments">
         <%= line_item.adjustments %>
-        <% if in_campaign %>
+
+        <% if campaign.present? %>
           <%= link_to edit_line_item_path(line_item.id), remote: true do %>
             <i class="material-icons">edit</i>
           <% end %>
         <% end %>
       </td>
+
       <td id="line_item_<%= line_item.id %>_sub_total">
         <%= line_item.sub_total %>
       </td>
+
       <td id="line_item_<%= line_item.id %>_status">
-        <% if in_campaign and line_item.unreviewed? %>
+        <% if campaign.present? and line_item.unreviewed? %>
           <%= link_to "review", change_status_line_item_path(line_item.id, event: 'review'), method: :put, remote: true, class: "waves-effect waves-light btn" %>
         <% else %>
           <%= line_item.status %>
         <% end %>
       </td>
+
       <td>
         <%= link_to line_item_path(line_item.id) do %>
           <i class="material-icons">remove_red_eye</i>

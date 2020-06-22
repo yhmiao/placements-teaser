@@ -3,7 +3,7 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: %i[show edit update change_status]
 
   def index
-    col_search  = LineItem::SEARCHABLE + LineItem::SEARCHABLE
+    col_search  = LineItem::SEARCHABLE + Campaign::SEARCHABLE
     @line_items = filter_search(@line_items, col_search)
   end
 

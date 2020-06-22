@@ -29,8 +29,9 @@
 
   <div class="card-content">
     <span class="card-title">Adjustments</span>
+
     <p id="line_item_<%= @line_item.id %>_adjustments">
-      <%= @line_item.adjustments %>&nbsp;&nbsp;
+      <%= @line_item.adjustments %>
       <%= link_to edit_line_item_path(@line_item.id), remote: true do %>
         <i class="material-icons">edit</i>
       <% end %>

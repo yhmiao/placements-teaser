@@ -4,23 +4,29 @@
       <%= link_to line_items_path, class: "center brand-logo mt-5" do %>
         <%= image_tag('Placements_logo.png') %>
       <% end %>
-      <ul class="left hide-on-med-and-down">
-        <li class="<%= is_active('campaigns') %>"><%= link_to "Campaigns", campaigns_path %></li>
-      </ul>
+
       <ul class="left hide-on-med-and-down">
         <li class="<%= is_active('line_items') %>"><%= link_to "Line Items", line_items_path %></li>
       </ul>
+
+      <ul class="left hide-on-med-and-down">
+        <li class="<%= is_active('campaigns') %>"><%= link_to "Campaigns", campaigns_path %></li>
+      </ul>
+
       <ul class="left hide-on-med-and-down">
         <li class="<%= is_active('invoices') %>"><%= link_to "Invoices", invoices_path %></li>
       </ul>
+
       <ul class="left hide-on-med-and-down">
         <li class="<%= is_active('versions') %>"><%= link_to "Versions", versions_path %></li>
       </ul>
+
       <ul class="right">
         <% if current_user %>
           <li>
             Salutations, <%= current_user.email %>
           </li>
+
           <li>
             <%= link_to destroy_user_session_path, method: :delete do %>
               <i class="material-icons">exit_to_app</i>

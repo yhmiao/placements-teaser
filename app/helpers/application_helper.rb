@@ -10,6 +10,6 @@ module ApplicationHelper
       order_by = 'ASC'
     end
 
-    link_to(name, params.merge(sort_by: column, order_by: order_by))
+    link_to name, params.merge(sort_by: column, order_by: order_by)
   end
 end

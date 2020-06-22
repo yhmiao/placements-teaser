@@ -1,4 +1,4 @@
 <h4 class="center blue-text text-lighten-3">Line Items</h4>
 
 <%= render(partial: 'layouts/partials/search', locals: {search_path: line_items_path}) %>
-<%= render(partial: 'line_items/partials/list', locals: {line_items: @line_items, order_by: params[:order_by], in_campaign: false}) %>
+<%= render(partial: 'line_items/partials/list', locals: {line_items: @line_items, order_by: params[:order_by]}) %>

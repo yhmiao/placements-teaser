@@ -1,4 +1,4 @@
-<% invoice = nil if local_assigns[:invoice].nil? %>
+<% invoice ||= local_assigns[:invoice] %>
 
 <div class="center">
   <%= paginate(campaigns) if campaigns.present? %>

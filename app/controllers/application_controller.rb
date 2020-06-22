@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     end
 
     count = params[:per] == 'All' ? records.count : params[:per]
+
     records.page(params[:page]).per(count)
   end
 

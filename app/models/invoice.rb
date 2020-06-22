@@ -19,7 +19,7 @@ class Invoice < ApplicationRecord
     event(:review) { transitions(from: :draft, to: :reviewed) }
     event(:pay)    { transitions(from: :reviewed, to: :paid) }
     event(:cancel) { transitions(from: %i[draft reviewed], to: :cancelled) }
-    event(:refund) { transitions(from: :paid, to: :cancelled) }
+    event(:refund) { transitions(from: :paid, to: :refunded) }
   end
 
   def campaigns_count
