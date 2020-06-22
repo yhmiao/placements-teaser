@@ -2,38 +2,35 @@
   <%= paginate(campaigns) if campaigns.present? %>
 </div>
 
-<%= form_for(:invoice, url: url, method: method) do |f| %>
-  <table>
-    <tr>
-      <th>Select</th>
-      <th><%= sort_link_to("Name", request.parameters, "name") %></th>
-      <th>Grand Total</th>
-      <th><%= sort_link_to("Status", request.parameters, "campaigns.status") %></th>
-      <th></th>
-    </tr>
+<table>
+  <tr>
+    <th>Select</th>
+    <th><%= sort_link_to("Name", request.parameters, "name") %></th>
+    <th>Grand Total</th>
+    <th><%= sort_link_to("Status", request.parameters, "campaigns.status") %></th>
+    <th></th>
+  </tr>
 
-    <% campaigns.each do |campaign| %>
-      <tr id="campaign_<%= campaign.id %>_row">
-        <td>
-          <label>
-            <%= f.check_box :campaign_ids, {multiple: true}, campaign.id, nil %>
-            <span></span>
-          </label>
-        </td>
-        <td><%= campaign.name %></td>
-        <td><%= campaign.grand_total %></td>
-        <td><%= campaign.status %></td>
-        <td>
-          <%= link_to campaign_path(campaign.id), target: :_blank do %>
-            <i class="material-icons">remove_red_eye</i>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-  <br />
-  <%= f.submit (method == :post ? 'Create' : 'Update'), class: "waves-effect waves-light btn" %>
-<% end %>
+  <% campaigns.each do |campaign| %>
+    <tr id="campaign_<%= campaign.id %>_row">
+      <td>
+        <label>
+          <input type="checkbox" value="<%= campaign.id %>" name="invoice[campaign_ids][]" id="invoice_campaign_ids_<%= campaign.id %>" />
+          <span></span>
+        </label>
+      </td>
+      <td><%= campaign.name %></td>
+      <td><%= campaign.grand_total %></td>
+      <td><%= campaign.status %></td>
+      <td>
+        <%= link_to campaign_path(campaign.id), target: :_blank do %>
+          <i class="material-icons">remove_red_eye</i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br />
 
 <div class="center">
   <%= paginate(campaigns) if campaigns.present? %>

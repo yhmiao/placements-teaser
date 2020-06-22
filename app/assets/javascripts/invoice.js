@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $('#campaign_select').modal();
+  $('#select_campaigns').modal();
 });

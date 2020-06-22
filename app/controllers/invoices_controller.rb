@@ -1,30 +1,35 @@
 class InvoicesController < ApplicationController
   before_action :set_invoices
-  before_action :set_invoice, only: %i[show change_status remove_campaign]
+  before_action :set_invoice, only: %i[show update change_status remove_campaign]
+  before_action :set_new_campaigns, only: %i[create update]
 
   def index
-    col_search = Invoice::SEARCHABLE
-    @invoices  = filter_search(@invoices, col_search)
-    @campaigns = get_campaigns
+    col_search        = Invoice::SEARCHABLE
+    @invoices         = filter_search(@invoices, col_search)
+    @select_campaigns = select_campaigns
   end
 
   def create
-    campaigns = Campaign.find(invoice_params[:campaign_ids])
-
-    if campaigns.present?
+    if @new_campaigns.present?
       @invoice = @invoices.create
-      @invoice.campaigns << campaigns
+      @invoice.campaigns << @new_campaigns
     end
 
     redirect_to invoice_path(@invoice)
   end
 
   def show
-    @campaigns = @invoice.campaigns.page(params[:page]).per(params[:per])
+    @campaigns        = @invoice.campaigns.page(params[:page]).per(params[:per])
+    @select_campaigns = select_campaigns
+  end
+
+  def update
+    @invoice.campaigns << @new_campaigns if @new_campaigns.present?
+    redirect_to invoice_path(@invoice)
   end
 
   def search_campaigns
-    @campaigns = get_campaigns
+    @select_campaigns = select_campaigns
   end
 
   def change_status
@@ -48,7 +53,7 @@ class InvoicesController < ApplicationController
   private
 
   def set_invoices
-    @invoices = Invoice.includes(:campaigns)
+    @invoices = Invoice.includes(campaigns: :line_items)
   end
 
   def set_invoice
@@ -59,10 +64,14 @@ class InvoicesController < ApplicationController
     params.require(:invoice).permit(campaign_ids: [])
   end
 
-  def get_campaigns
+  def select_campaigns
     col_search = Campaign::SEARCHABLE
     statuses   = Invoice::FAIL_STATUS.join("', '")
-    @campaigns = Campaign.includes(:line_items).left_joins(:invoices).where("invoices.id IS NULL OR invoices.status IN ('#{statuses}')")
-    filter_search(@campaigns, col_search)
+    campaigns  = Campaign.includes(:line_items).left_joins(:invoices).where("invoices.id IS NULL OR invoices.status IN ('#{statuses}')")
+    filter_search(campaigns, col_search)
+  end
+
+  def set_new_campaigns
+    @new_campaigns = Campaign.find(invoice_params[:campaign_ids])
   end
 end

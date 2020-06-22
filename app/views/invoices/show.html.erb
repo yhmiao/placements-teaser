@@ -32,6 +32,12 @@
 
   <div class="card-content grey lighten-4">
     <h5>Campaigns</h5>
+
+    <div class="clearfix">
+      <a class="right" href="#select_campaigns"><i class="material-icons">add</i></a>
+    </div>
+
+    <%= render(partial: 'invoices/partials/select_campaigns', locals: {campaigns: @select_campaigns, url: invoice_path, method: :put}) %>
     <%= render(partial: 'campaigns/partials/list', locals: {campaigns: @campaigns, invoice_mode: nil, invoice: @invoice}) %>
   </div>
 </div>
