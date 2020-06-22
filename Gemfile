@@ -26,7 +26,7 @@ gem 'materialize-sass', '~> 1.0.0'
 gem 'kaminari'
 gem 'aasm'
 gem 'paper_trail'
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 
 group :development, :test do
   gem 'pry-byebug'

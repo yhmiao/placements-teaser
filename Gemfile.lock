@@ -47,9 +47,6 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (9.8.1)
       execjs
-    axlsx_rails (0.6.1)
-      actionpack (>= 3.1)
-      caxlsx (>= 3.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.6)
@@ -61,6 +58,9 @@ GEM
       mimemagic (~> 0.3)
       nokogiri (~> 1.10, >= 1.10.4)
       rubyzip (>= 1.3.0, < 3)
+    caxlsx_rails (0.6.2)
+      actionpack (>= 3.1)
+      caxlsx (>= 3.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
@@ -235,8 +235,8 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  axlsx_rails
   bootsnap (>= 1.1.0)
+  caxlsx_rails
   devise
   jquery-rails
   kaminari
