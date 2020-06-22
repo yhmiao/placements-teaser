@@ -10,7 +10,8 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @line_items = @campaign.line_items.page(params[:page]).per(params[:per])
+    @line_items = sort_by(@campaign.line_items)
+    @line_items = @line_items.page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html

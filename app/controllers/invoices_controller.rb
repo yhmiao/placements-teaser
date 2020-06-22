@@ -19,7 +19,8 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @campaigns = @invoice.campaigns.page(params[:page]).per(params[:per])
+    @campaigns = sort_by(@invoice.campaigns)
+    @campaigns = @campaigns.page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html do
