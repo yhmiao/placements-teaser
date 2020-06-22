@@ -1,0 +1,15 @@
+var campaign_row            = $("#campaign_<%= @campaign.id %>_row");
+var invoice_campaigns_count = $("#invoice_<%= @invoice.id %>_campaigns_count");
+var invoice_grand_total     = $("#invoice_<%= @invoice.id %>_grand_total");
+
+campaign_row.remove();
+invoice_campaigns_count.empty();
+invoice_campaigns_count.append("<%= @invoice.campaigns_count %>");
+invoice_grand_total.empty();
+invoice_grand_total.append("<%= @invoice.grand_total %>");
+
+var message = "Campaign \"<%= @campaign.name %>\" has been removed.";
+    message += "\nCampaigns Count has been updated to <%= @invoice.campaigns_count %>.";
+    message += "\nGrand-total has been updated to <%= @invoice.grand_total %>.";
+
+alert(message);

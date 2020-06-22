@@ -10,13 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_022853) do
+ActiveRecord::Schema.define(version: 2020_06_21_141750) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status", default: "unreviewed"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "token", null: false
+    t.string "status", default: "draft", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invoices_campaigns", force: :cascade do |t|
+    t.integer "invoice_id"
+    t.integer "campaign_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_invoices_campaigns_on_campaign_id"
+    t.index ["invoice_id"], name: "index_invoices_campaigns_on_invoice_id"
   end
 
   create_table "line_items", force: :cascade do |t|

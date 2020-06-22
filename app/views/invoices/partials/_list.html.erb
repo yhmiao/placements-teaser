@@ -1,0 +1,31 @@
+<div class="center">
+  <%= paginate(invoices) if invoices.present? %>
+</div>
+
+<table>
+  <tr>
+    <th><%= sort_link_to("Token", request.parameters, "token") %></th>
+    <th><%= sort_link_to("Status", request.parameters, "invoices.status") %></th>
+    <th>Campaigns Count</th>
+    <th>Grand Total</th>
+    <th></th>
+  </tr>
+
+  <% invoices.each do |invoice| %>
+    <tr>
+      <td><%= invoice.token %></td>
+      <td><%= invoice.status %></td>
+      <td><%= invoice.campaigns_count %></td>
+      <td><%= invoice.grand_total %></td>
+      <td>
+        <%= link_to invoice_path(invoice) do %>
+          <i class="material-icons">remove_red_eye</i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="center">
+  <%= paginate(invoices) if invoices.present? %>
+</div>

@@ -1,0 +1,14 @@
+<div id="campaign_select" class="modal">
+  <div class="modal-content">
+    <h4>New Invoice</h4>
+    <div>
+      <%= render(partial: 'layouts/partials/search', locals: {search_path: search_campaigns_invoices_path, remote: true}) %>
+      <div id="invoice_select_campaigns_list">
+        <%= render(partial: 'campaigns/partials/select_list', locals: {campaigns: campaigns, url: invoices_path, method: :post}) %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+  </div>
+</div>

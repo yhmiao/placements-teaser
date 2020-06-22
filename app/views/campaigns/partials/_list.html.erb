@@ -1,3 +1,5 @@
+<% invoice = nil if local_assigns[:invoice].nil? %>
+
 <div class="center">
   <%= paginate(campaigns) if campaigns.present? %>
 </div>
@@ -10,8 +12,9 @@
     <th><%= sort_link_to("Status", request.parameters, "campaigns.status") %></th>
     <th></th>
   </tr>
+
   <% campaigns.each do |campaign| %>
-    <tr>
+    <tr id="campaign_<%= campaign.id %>_row">
       <td><%= campaign.name %></td>
       <td><%= campaign.line_items_count %></td>
       <td><%= campaign.grand_total %></td>
@@ -19,6 +22,12 @@
       <td>
         <%= link_to campaign_path(campaign.id) do %>
           <i class="material-icons">remove_red_eye</i>
+        <% end %>
+
+        <% if invoice.present? %>
+          <%= link_to remove_campaign_invoice_path(invoice, campaign_id: campaign.id), method: :put, remote: true do %>
+            <i class="material-icons">clear</i>
+          <% end %>
         <% end %>
       </td>
     </tr>
