@@ -5,6 +5,8 @@ class Campaign < ApplicationRecord
   STATUS     = %i[unreviewed reviewed].freeze
 
   has_many :line_items
+  has_many :invoices_campaigns
+  has_many :invoices, through: :invoices_campaigns
 
   has_paper_trail
 

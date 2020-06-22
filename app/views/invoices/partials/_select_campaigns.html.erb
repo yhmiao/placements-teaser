@@ -1,0 +1,21 @@
+<div id="select_campaigns" class="modal">
+  <div class="modal-content">
+    <h4><%= method == :post ? 'New' : 'Edit' %> Invoice</h4>
+
+    <div>
+      <%= render(partial: 'layouts/partials/search', locals: {search_path: search_campaigns_invoices_path, remote: true}) %>
+      
+      <%= form_for(:invoice, url: url, method: method) do |f| %>
+        <div id="invoice_select_campaigns_list">
+          <%= render(partial: 'campaigns/partials/select_list', locals: {campaigns: campaigns}) %>
+        </div>
+
+        <%= f.submit (method == :post ? 'Create' : 'Update'), class: "waves-effect waves-light btn" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">cancel</a>
+  </div>
+</div>

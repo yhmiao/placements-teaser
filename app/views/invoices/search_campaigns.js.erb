@@ -1,0 +1,4 @@
+var campaigns_list = $("#invoice_select_campaigns_list");
+
+campaigns_list.empty();
+campaigns_list.append("<%= escape_javascript(render partial: 'campaigns/partials/select_list', locals: {campaigns: @select_campaigns}).html_safe %>");

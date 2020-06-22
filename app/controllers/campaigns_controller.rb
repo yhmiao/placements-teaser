@@ -15,7 +15,7 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"invoice-#{DateTime.current.strftime('%Q')}.csv\""
+        headers['Content-Disposition'] = "attachment; filename=\"campaign-#{DateTime.current.strftime('%Q')}.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
     end

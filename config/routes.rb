@@ -13,6 +13,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :invoices, only: %i[index create show update] do
+    collection do
+      get :search_campaigns
+    end
+
+    member do
+      put :change_status
+      put :remove_campaign
+    end
+  end
+
   resources :line_items, only: :index
   resources :line_items, only: %i[show edit update] do
     member do

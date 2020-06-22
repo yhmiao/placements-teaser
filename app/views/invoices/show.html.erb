@@ -1,0 +1,48 @@
+<h4 class="center blue-text text-lighten-3">Invoice</h4>
+
+<div class="clearfix">
+  <%= link_to :back, class: "left" do %>
+    <i class="material-icons">navigate_before</i>
+  <% end %>
+
+  <%= link_to invoice_path(@invoice, format: :xlsx), class: "right" do %>
+    <i class="material-icons">file_download</i>
+  <% end %>
+</div>
+
+<div class="clear"></div>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">Token</span>
+    <p><%= @invoice.token %></p>
+  </div>
+
+  <div class="card-content">
+    <span class="card-title">Campaigns Count</span>
+    <p id="invoice_<%= @invoice.id %>_campaigns_count"><%= @invoice.campaigns_count %></p>
+  </div>
+
+  <div class="card-content">
+    <span class="card-title">Grand Total</span>
+    <p id="invoice_<%= @invoice.id %>_grand_total"><%= @invoice.grand_total %></p>
+  </div>
+
+  <div class="card-content">
+    <span class="card-title">Status</span>
+    <p id="invoice_<%= @invoice.id %>_status">
+      <%= render(partial: 'invoices/partials/status', locals: {invoice: @invoice}) %>
+    </p>
+  </div>
+
+  <div class="card-content grey lighten-4">
+    <h5>Campaigns</h5>
+
+    <div class="clearfix">
+      <a class="modal-trigger right" href="#select_campaigns"><i class="material-icons">add</i></a>
+    </div>
+
+    <%= render(partial: 'invoices/partials/select_campaigns', locals: {campaigns: @select_campaigns, url: invoice_path, method: :put}) %>
+    <%= render(partial: 'campaigns/partials/list', locals: {campaigns: @campaigns, invoice_mode: nil, invoice: @invoice}) %>
+  </div>
+</div>
