@@ -14,7 +14,11 @@
 
   <div class="card-content">
     <span class="card-title">Item Link</span>
-    <p><%= link_to @item.name, url_for(@item) %></p>
+    <p>
+      <%= link_to url_for(@item) do %>
+        <%= @item.try(:name) || @item.id %>
+      <% end %>
+    </p>
   </div>
 
   <div class="card-content">

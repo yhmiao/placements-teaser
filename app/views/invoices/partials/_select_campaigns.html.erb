@@ -1,3 +1,5 @@
+<% campaigns = [] if local_assigns[:campaigns].nil? %>
+
 <div id="select_campaigns" class="modal">
   <div class="modal-content">
     <h4><%= method == :post ? 'New' : 'Edit' %> Invoice</h4>

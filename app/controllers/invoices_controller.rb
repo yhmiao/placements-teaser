@@ -4,9 +4,8 @@ class InvoicesController < ApplicationController
   before_action :set_new_campaigns, only: %i[create update]
 
   def index
-    col_search        = Invoice::SEARCHABLE
-    @invoices         = filter_search(@invoices, col_search)
-    @select_campaigns = select_campaigns
+    col_search = Invoice::SEARCHABLE
+    @invoices  = filter_search(@invoices, col_search)
   end
 
   def create
@@ -23,10 +22,7 @@ class InvoicesController < ApplicationController
     @campaigns = @campaigns.page(params[:page]).per(params[:per])
 
     respond_to do |format|
-      format.html do
-        @select_campaigns = select_campaigns
-      end
-
+      format.html
       format.xlsx do
         headers['Content-Disposition'] = "attachment; filename=\"invoice-#{DateTime.current.strftime('%Q')}.xlsx\""
         headers['Content-Type'] ||= 'text/xlsx'
@@ -36,6 +32,7 @@ class InvoicesController < ApplicationController
 
   def update
     @invoice.campaigns << @new_campaigns if @new_campaigns.present?
+
     redirect_to invoice_path(@invoice)
   end
 
@@ -45,9 +42,11 @@ class InvoicesController < ApplicationController
 
   def change_status
     @invoice.send("#{params[:event]}!")
-    render :change_status
+
+    redirect_to invoice_path(@invoice)
   rescue AASM::InvalidTransition
     update_alert('status')
+
     render 'layouts/alert'
   end
 
@@ -78,11 +77,12 @@ class InvoicesController < ApplicationController
   end
 
   def select_campaigns
-    col_search = Campaign::SEARCHABLE
-    statuses   = Invoice::FAIL_STATUS.join("', '")
-    campaigns  = Campaign.includes(:line_items)
-                         .left_joins(:invoices)
-                         .where("invoices.id IS NULL OR invoices.status IN ('#{statuses}')")
+    col_search  = Campaign::SEARCHABLE
+    has_invoice = Campaign.left_joins(:invoices).where(invoices: {status: Invoice::OK_STATUS}).pluck(:id)
+    campaigns   = Campaign.includes(:line_items)
+                          .left_joins(:invoices)
+                          .where("invoices.id IS NULL OR campaigns.id NOT IN (#{has_invoice.join(', ')})")
+                          .distinct
 
     filter_search(campaigns, col_search)
   end

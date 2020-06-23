@@ -38,11 +38,15 @@
   <div class="card-content grey lighten-4">
     <h5>Campaigns</h5>
 
-    <div class="clearfix">
-      <a class="modal-trigger right" href="#select_campaigns"><i class="material-icons">add</i></a>
-    </div>
+    <% if @invoice.draft? %>
+      <div class="clearfix">
+        <%= link_to search_campaigns_invoices_path, remote: true, class: "right", id: "open_search_campaign_link" do %>
+          <i class="material-icons">add</i>
+        <% end %>
+      </div>
+    <% end %>
 
-    <%= render(partial: 'invoices/partials/select_campaigns', locals: {campaigns: @select_campaigns, url: invoice_path, method: :put}) %>
+    <%= render(partial: 'invoices/partials/select_campaigns', locals: {url: invoice_path, method: :put}) %>
     <%= render(partial: 'campaigns/partials/list', locals: {campaigns: @campaigns, invoice_mode: nil, invoice: @invoice}) %>
   </div>
 </div>

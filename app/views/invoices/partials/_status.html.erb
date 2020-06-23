@@ -1,12 +1,12 @@
 <% case @invoice.status %>
 <% when 'draft' %>
-  <%= link_to "review", change_status_invoice_path(invoice, event: 'review'), method: :put, remote: true, class: "waves-effect waves-light btn" %>
-  <%= link_to "cancel", change_status_invoice_path(invoice, event: 'cancel'), method: :put, remote: true, class: "waves-effect waves-light btn" %>
+  <%= link_to "review", change_status_invoice_path(invoice, event: 'review'), method: :put, class: "waves-effect waves-light btn" %>
+  <%= link_to "cancel", change_status_invoice_path(invoice, event: 'cancel'), method: :put, class: "waves-effect waves-light btn" %>
 <% when 'reviewed' %>
-  <%= link_to "pay", change_status_invoice_path(invoice, event: 'pay'), method: :put, remote: true, class: "waves-effect waves-light btn" %>
-  <%= link_to "cancel", change_status_invoice_path(invoice, event: 'cancel'), method: :put, remote: true, class: "waves-effect waves-light btn" %>
+  <%= link_to "pay", change_status_invoice_path(invoice, event: 'pay'), method: :put, class: "waves-effect waves-light btn" %>
+  <%= link_to "cancel", change_status_invoice_path(invoice, event: 'cancel'), method: :put, class: "waves-effect waves-light btn" %>
 <% when 'paid' %>
-  <%= link_to "refund", change_status_invoice_path(invoice, event: 'refund'), method: :put, remote: true, class: "waves-effect waves-light btn" %>
+  <%= link_to "refund", change_status_invoice_path(invoice, event: 'refund'), method: :put, class: "waves-effect waves-light btn" %>
 <% else %>
   <%= @invoice.status %>
 <% end %>

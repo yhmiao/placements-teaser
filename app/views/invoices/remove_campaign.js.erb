@@ -3,7 +3,9 @@ var invoice_campaigns_count = $("#invoice_<%= @invoice.id %>_campaigns_count");
 var invoice_grand_total     = $("#invoice_<%= @invoice.id %>_grand_total");
 
 campaign_row.remove();
+
 invoice_campaigns_count.empty();
 invoice_campaigns_count.append("<%= @invoice.campaigns_count %>");
+
 invoice_grand_total.empty();
 invoice_grand_total.append("<%= @invoice.grand_total %>");

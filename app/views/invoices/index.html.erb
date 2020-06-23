@@ -1,9 +1,9 @@
 <h4 class="center blue-text text-lighten-3">Invoices</h4>
 
 <div class="clearfix">
-  <a class="waves-effect waves-light btn modal-trigger right" href="#select_campaigns">New</a>
+  <%= link_to "New", search_campaigns_invoices_path, remote: true, class: "waves-effect waves-light btn right", id: "open_search_campaign_link" %>
 </div>
 
-<%= render(partial: 'invoices/partials/select_campaigns', locals: {campaigns: @select_campaigns, url: invoices_path, method: :post} ) %>
+<%= render(partial: 'invoices/partials/select_campaigns', locals: {url: invoices_path, method: :post} ) %>
 <%= render(partial: 'layouts/partials/search', locals: {search_path: invoices_path}) %>
 <%= render(partial: 'invoices/partials/list', locals: {invoices: @invoices}) %>
