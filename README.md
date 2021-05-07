@@ -44,7 +44,7 @@ sqlite3
 #### 1. Clone
 
 ```
-git clone git@github.com:yhmiao/howardtodo.git
+git clone https://github.com/yhmiao/placements-teaser
 ```
 
 #### 2. Setup Local Environment
